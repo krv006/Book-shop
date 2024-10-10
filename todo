@@ -1,0 +1,17 @@
+metabase
+crontab
+deployment(cicd)
+testing
+
+
+
+TASK
+    saytdagi categorylardi productlarni ovolish kerak
+
+
+
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/krv006/Book-shop.git
+git push -u origin main
