@@ -16,6 +16,7 @@ isort = "^5.13.2"
 python-dotenv = "^1.0.1"
 django-mptt = "^0.16.0"
 pillow = "^10.4.0"
+django-ckeditor-5 = "^0.2.13"
 
 
 

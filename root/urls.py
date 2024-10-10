@@ -9,6 +9,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('api/v1/', include('apps.shops.urls')),
+                  path("ckeditor5/", include('django_ckeditor_5.urls')),
                   path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
                   path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
               ] + static(MEDIA_URL, document_root=MEDIA_ROOT) + static(STATIC_URL,

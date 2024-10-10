@@ -9,10 +9,10 @@ TASK
     saytdagi categorylardi productlarni ovolish kerak
 
 
+Homework
 
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/krv006/Book-shop.git
-git push -u origin main
-
+1. book, author, cart, wishlist modellari
+2. jwt o'rnatish
+3. login, register apilari
+4. user o'zini malumotlarini update qilish apisi
+5. wishlist apilari

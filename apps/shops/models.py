@@ -1,7 +1,8 @@
 from django.db.models import CharField, CASCADE, TextField, ImageField, Model, ForeignKey
 from mptt.models import MPTTModel, TreeForeignKey
+from django_ckeditor_5.fields import CKEditor5Field
 
-from shared.model import TimeBasedModel
+from shared.model import TimeBasedModel, SlugTimeBasedModel
 
 
 class Section(TimeBasedModel):
@@ -19,3 +20,14 @@ class Category(MPTTModel):
         order_insertion_by = ['name']
 
 
+class Book(SlugTimeBasedModel):
+    name = CharField(max_length=255)
+    description = CKEditor5Field()
+
+
+class WishList(TimeBasedModel):
+    user = ForeignKey('users.User', CASCADE)
+    book = ForeignKey('shops.Book', CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'product')
