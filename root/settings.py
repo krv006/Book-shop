@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'mptt',
     'django_ckeditor_5',
+    'rest_framework_simplejwt',
 
 ]
 

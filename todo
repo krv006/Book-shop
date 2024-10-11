@@ -16,3 +16,12 @@ Homework
 3. login, register apilari
 4. user o'zini malumotlarini update qilish apisi
 5. wishlist apilari
+
+
+MIGRATE DA XATO CHIQSA
+
+python3 manage.py migrate --fake contenttypes zero
+python3 manage.py migrate
+python3 manage.py migrate --fake-initial
+python3 manage.py makemigrations
+python3 manage.py migrate

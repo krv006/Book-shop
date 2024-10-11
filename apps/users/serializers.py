@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
+
+from users.models import User
 
 
 class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
-        exclude = ()
+        fields = '__all__'
