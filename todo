@@ -11,11 +11,11 @@ TASK
 
 Homework
 
-1. book, author, cart, wishlist modellari
-2. jwt o'rnatish
-3. login, register apilari
-4. user o'zini malumotlarini update qilish apisi
-5. wishlist apilari
+1. book, author, cart, wishlist modellari ✅
+2. jwt o'rnatish ✅
+3. login, register apilari ❎
+4. user o'zini malumotlarini update qilish apisi ✅
+5. wishlist apilari ✅
 
 
 MIGRATE DA XATO CHIQSA

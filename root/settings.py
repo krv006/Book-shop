@@ -64,6 +64,9 @@ TEMPLATES = [
     },
 ]
 
+
+
+
 WSGI_APPLICATION = 'root.wsgi.application'
 AUTH_USER_MODEL = 'users.User'
 
@@ -199,5 +202,14 @@ CKEDITOR_5_CONFIGS = {
             'startIndex': 'true',
             'reversed': 'true',
         }
+    }
+}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email'
+        ]
     }
 }

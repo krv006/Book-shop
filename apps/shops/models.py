@@ -1,7 +1,7 @@
 from django.db.models import CharField, CASCADE, TextField, ImageField, Model, ForeignKey, JSONField, TextChoices, \
-    DecimalField, IntegerField
-from mptt.models import MPTTModel, TreeForeignKey
+    DecimalField, PositiveIntegerField, RESTRICT, PositiveSmallIntegerField, ManyToManyField, BooleanField
 from django_ckeditor_5.fields import CKEditor5Field
+from mptt.models import MPTTModel, TreeForeignKey
 
 from shared.model import TimeBasedModel, SlugTimeBasedModel
 
@@ -22,41 +22,68 @@ class Category(MPTTModel):
 
 
 class Book(SlugTimeBasedModel):
-    class BookCover(TextChoices):
-        Hardcover = 'hardcover', 'Hardcover'
-        Softcover = 'softcover', 'softcover'
+    class Format(TextChoices):
+        HARDCOVER = 'hardcover', 'Hardcover'
+        PAPERCOVER = 'softcover', 'softcover'
 
     overview = CKEditor5Field()
     features = JSONField()
-    book_cover = CharField(max_length=255, choices=BookCover, default=BookCover.Hardcover)
+    # format = CharField(max_length=255, choices=Format, default=Format.HARDCOVER)
     used_good_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     new_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     ebook_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     audiobook_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    author = ForeignKey('users.Author', CASCADE)
-
-
-class Rating(Model):
-    book = ForeignKey('shops.Book', on_delete=CASCADE)
-    stars = DecimalField(max_digits=3, decimal_places=1)
-    review_count = IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.stars} stars for {self.book.title}"
+    author = ManyToManyField('users.Author')
+    reviews_count = PositiveIntegerField(db_default=0)
 
 
 class Review(TimeBasedModel):
     name = CharField(max_length=255)
     description = CKEditor5Field()
-    book = ForeignKey('shops.Book', CASCADE)
+    start = PositiveSmallIntegerField()  # TODO tekshirish kerak (1-10 oraliqdagi son)
+    book = ForeignKey('shops.Book', CASCADE, related_name='reviews')
 
     def __str__(self):
         return self.name
 
 
-class WishList(TimeBasedModel):
-    user = ForeignKey('users.User', CASCADE)
-    book = ForeignKey('shops.Book', CASCADE)
+class Country(Model):
+    name = CharField(max_length=255)
 
-    class Meta:
-        ordering = ['-created_at']
+    def __str__(self):
+        return self.name
+
+
+class Address(TimeBasedModel):
+    first_name = CharField(max_length=255)
+    last_name = CharField(max_length=255)
+    country = ForeignKey(Country, CASCADE)
+    address_line_1 = CharField(max_length=255)
+    address_line_2 = CharField(max_length=255, null=True, blank=True)
+    city = CharField(max_length=255)
+    state = CharField(max_length=255)
+    postal_code = PositiveIntegerField(default=0)
+    phone_number = CharField(max_length=15)  # todo 998901001010 database da shunday saqlashi kerak + siz
+    user = ForeignKey('users.User', RESTRICT)
+    shipping_address = BooleanField(default=False)
+    billing_address = BooleanField(default=True)
+
+    # TODO 2ta boolean ni qoshish kk
+
+    def __str__(self):
+        return f"{self.first_name} - {self.last_name}"
+
+
+class Cart(TimeBasedModel):
+    book = ForeignKey('shops.Book', CASCADE)
+    owner = ForeignKey('users.User', CASCADE)
+    quantity = PositiveIntegerField(db_default=1)
+    '''
+    format
+    condition
+    seller
+    ship from
+    '''
+
+    def __str__(self):
+        return f"{self.owner} - {self.book}"
