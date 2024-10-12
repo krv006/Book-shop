@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'mptt',
     'django_ckeditor_5',
     'rest_framework_simplejwt',
+    'django_celery_results',
 
 ]
 
@@ -63,9 +64,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
-
 
 WSGI_APPLICATION = 'root.wsgi.application'
 AUTH_USER_MODEL = 'users.User'
@@ -213,3 +211,29 @@ SOCIALACCOUNT_PROVIDERS = {
         ]
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'rvkamronbek@gmail.com'
+EMAIL_HOST_PASSWORD = 'lsjw bobj kams uzam'
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'default'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/0',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+    'users.backend.CustomAuthBackend',  # Custom backend
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+)

@@ -1,6 +1,5 @@
 import json
 
-# Butun dunyo davlatlari ro'yxati
 countries = [
     "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina",
     "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
@@ -35,7 +34,6 @@ countries = [
     "Zambia", "Zimbabwe"
 ]
 
-# Django fixture formatida JSON yaratish
 countries_json = [
     {
         "model": "app_name.country",
@@ -47,8 +45,6 @@ countries_json = [
     for idx, country in enumerate(countries)
 ]
 
-# JSON faylga saqlash
 with open('fixtures/country.json', 'w') as file:
     json.dump(countries_json, file, indent=4)
-
 print("Davlatlar Django fixture formatida JSON faylga saqlandi.")

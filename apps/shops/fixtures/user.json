@@ -1,0 +1,158 @@
+[
+  {
+    "model": "user.User",
+    "pk": 1,
+    "fields": {
+      "id": 0,
+      "password": "string",
+      "last_login": "2024-10-11T13:20:08.152Z",
+      "is_superuser": true,
+      "username": "alisher",
+      "first_name": "Alisher",
+      "last_name": "Alisherov",
+      "email": "alisher@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-10T13:20:08.154Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  },
+  {
+    "model": "user.User",
+    "pk": 2,
+    "fields": {
+      "id": 1,
+      "password": "string",
+      "last_login": "2024-10-10T15:30:00.000Z",
+      "is_superuser": false,
+      "username": "vali",
+      "first_name": "Vali",
+      "last_name": "Valiev",
+      "email": "vali@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-09T15:00:00.000Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  },
+  {
+    "model": "user.User",
+    "pk": 3,
+    "fields": {
+      "id": 2,
+      "password": "string",
+      "last_login": "2024-10-09T12:00:00.000Z",
+      "is_superuser": true,
+      "username": "otash",
+      "first_name": "Otash",
+      "last_name": "Otashov",
+      "email": "otash@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-08T10:30:00.000Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  },
+  {
+    "model": "user.User",
+    "pk": 4,
+    "fields": {
+      "id": 3,
+      "password": "string",
+      "last_login": "2024-10-08T11:15:00.000Z",
+      "is_superuser": false,
+      "username": "abbos",
+      "first_name": "Abbos",
+      "last_name": "Abbosov",
+      "email": "abbos@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-07T12:45:00.000Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  },
+  {
+    "model": "user.User",
+    "pk": 5,
+    "fields": {
+      "id": 4,
+      "password": "string",
+      "last_login": "2024-10-06T09:00:00.000Z",
+      "is_superuser": true,
+      "username": "abdulloh",
+      "first_name": "Abdulloh",
+      "last_name": "Abdullohov",
+      "email": "abdulloh@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-06T09:00:00.000Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  },
+  {
+    "model": "user.User",
+    "pk": 6,
+    "fields": {
+      "id": 5,
+      "password": "string",
+      "last_login": "2024-10-05T14:15:00.000Z",
+      "is_superuser": false,
+      "username": "hasan",
+      "first_name": "Hasan",
+      "last_name": "Hasanov",
+      "email": "hasan@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-05T14:15:00.000Z",
+      "groups": [
+        0
+      ],
+      "user_permissions": [
+        0
+      ],
+      "wishlist": [
+        0
+      ]
+    }
+  }
+]

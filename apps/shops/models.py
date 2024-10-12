@@ -1,7 +1,10 @@
+from django.core.exceptions import ValidationError
 from django.db.models import CharField, CASCADE, TextField, ImageField, Model, ForeignKey, JSONField, TextChoices, \
     DecimalField, PositiveIntegerField, RESTRICT, PositiveSmallIntegerField, ManyToManyField, BooleanField
 from django_ckeditor_5.fields import CKEditor5Field
 from mptt.models import MPTTModel, TreeForeignKey
+
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from shared.model import TimeBasedModel, SlugTimeBasedModel
 
@@ -24,11 +27,11 @@ class Category(MPTTModel):
 class Book(SlugTimeBasedModel):
     class Format(TextChoices):
         HARDCOVER = 'hardcover', 'Hardcover'
-        PAPERCOVER = 'softcover', 'softcover'
+        PAPERCOVER = 'pepercover', 'Pepercover'
 
     overview = CKEditor5Field()
     features = JSONField()
-    # format = CharField(max_length=255, choices=Format, default=Format.HARDCOVER)
+    # format = CharField(max_length=255, choices=Format, default=Format.HARDCOVER) # todo togirlash kerak buni
     used_good_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     new_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     ebook_price = DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
@@ -40,11 +43,15 @@ class Book(SlugTimeBasedModel):
 class Review(TimeBasedModel):
     name = CharField(max_length=255)
     description = CKEditor5Field()
-    start = PositiveSmallIntegerField()  # TODO tekshirish kerak (1-10 oraliqdagi son)
+    stars = PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)])
     book = ForeignKey('shops.Book', CASCADE, related_name='reviews')
 
     def __str__(self):
         return self.name
+
+    def get_stars(self):
+        return self.stars / 2
 
 
 class Country(Model):
@@ -61,14 +68,18 @@ class Address(TimeBasedModel):
     address_line_1 = CharField(max_length=255)
     address_line_2 = CharField(max_length=255, null=True, blank=True)
     city = CharField(max_length=255)
-    state = CharField(max_length=255)
-    postal_code = PositiveIntegerField(default=0)
-    phone_number = CharField(max_length=15)  # todo 998901001010 database da shunday saqlashi kerak + siz
+    state = CharField(max_length=255, null=True, blank=True)
+    postal_code = PositiveIntegerField(db_default=0, null=True, blank=True)
+    phone_number = CharField(max_length=16) # todo + siz saqlash kerak
     user = ForeignKey('users.User', RESTRICT)
-    shipping_address = BooleanField(default=False)
-    billing_address = BooleanField(default=True)
+    shipping_address = BooleanField(db_default=False)
+    billing_address = BooleanField(db_default=True)
 
-    # TODO 2ta boolean ni qoshish kk
+    def clean(self):
+        if self.phone_number and not self.phone_number.startswith('+'):
+            self.phone_number = self.phone_number.removeprefix('+')
+        if len(self.phone_number) < 16:
+            raise ValidationError('Telefon raqami to\'g\'ri emas.')
 
     def __str__(self):
         return f"{self.first_name} - {self.last_name}"

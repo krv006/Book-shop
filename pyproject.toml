@@ -18,6 +18,10 @@ django-mptt = "^0.16.0"
 pillow = "^10.4.0"
 django-ckeditor-5 = "^0.2.13"
 djangorestframework-simplejwt = "^5.3.1"
+celery = {extras = ["redis"], version = "^5.4.0"}
+django-celery-results = "^2.5.1"
+rediscache = "^1.0.0"
+django-redis = "^5.4.0"
 
 
 
