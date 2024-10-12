@@ -1,3 +1,9 @@
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'root.settings')
+django.setup()
+
 import json
 
 countries = [
@@ -36,7 +42,7 @@ countries = [
 
 countries_json = [
     {
-        "model": "app_name.country",
+        "model": "shops.Country",
         "pk": idx + 1,
         "fields": {
             "name": country

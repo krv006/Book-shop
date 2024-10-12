@@ -64,7 +64,7 @@ class Country(Model):
 class Address(TimeBasedModel):
     first_name = CharField(max_length=255)
     last_name = CharField(max_length=255)
-    country = ForeignKey(Country, CASCADE)
+    country = ForeignKey('shops.Country', CASCADE)
     address_line_1 = CharField(max_length=255)
     address_line_2 = CharField(max_length=255, null=True, blank=True)
     city = CharField(max_length=255)
