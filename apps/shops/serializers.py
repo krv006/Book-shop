@@ -14,5 +14,7 @@ class AddressModelSerializer(ModelSerializer):
         model = Address
         fields = '__all__'
 
-
-
+    def to_representation(self, instance: Address):
+        repr = super().to_representation(instance)
+        repr['country'] = CountryModelSerializer(instance.country).data
+        return repr

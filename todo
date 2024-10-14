@@ -17,11 +17,11 @@ Homework
 3. login, register apilari ❎ 50/50 -> Register tugadi login da xato chiqayapti
 3.1 adminkaga email orqali kirish ✅
 
-3.2 celery orqali ishlatish ❎
-3.3 register one-time link -> hash(user.id+user.is_active) -> mana shunaqa token qilish kerak ❎
-3.4 premium userlarga ertaroq emailiga xabar borishi kerak [celery] ❎
+3.2 celery orqali ishlatish ❎ todo celery qoshildi lekin nima qilishdi bilmadim
+3.3 register one-time link -> hash(user.id+user.is_active) -> mana shunaqa token qilish kerak ❎ todo qila olmadim
+3.4 premium userlarga ertaroq emailiga xabar borishi kerak [celery] ❎ todo qila olmadim
 3.5 admin@gmail.com -> bolsa admin desak kirib ketishi kerak ❎ -> user di ikkiga bolib olamiz va defaultdagi
-user di korsatib qoyamiz -> adminka ichiga kirayapti va xatosi bor 60 foiz ish tugadi
+user di korsatib qoyamiz -> adminka ichiga kirayapti va xatosi bor 60 foiz ish tugadi todo 70 foiz ishladi
 
 4. user o'zini malumotlarini update qilish apisi ✅
 5. wishlist apilari ✅

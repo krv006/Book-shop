@@ -64,16 +64,16 @@ class Country(Model):
 class Address(TimeBasedModel):
     first_name = CharField(max_length=255)
     last_name = CharField(max_length=255)
-    country = ForeignKey('shops.Country', CASCADE)
     address_line_1 = CharField(max_length=255)
     address_line_2 = CharField(max_length=255, null=True, blank=True)
     city = CharField(max_length=255)
     state = CharField(max_length=255, null=True, blank=True)
     postal_code = PositiveIntegerField(db_default=0, null=True, blank=True)
-    phone_number = CharField(max_length=16) # todo + siz saqlash kerak
-    user = ForeignKey('users.User', RESTRICT)
+    phone_number = CharField(max_length=16)  # todo + siz saqlash kerak
     shipping_address = BooleanField(db_default=False)
     billing_address = BooleanField(db_default=True)
+    country = ForeignKey('shops.Country', CASCADE)
+    user = ForeignKey('users.User', RESTRICT)
 
     def clean(self):
         if self.phone_number and not self.phone_number.startswith('+'):
