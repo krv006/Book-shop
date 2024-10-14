@@ -11,7 +11,7 @@ from shops.serializers import AddressModelSerializer, CountryModelSerializer
 class AddressListCreateAPIView(ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressModelSerializer
-
+    permission_classes = IsAuthenticated,
 
 @extend_schema(tags=['country'])
 class CountryListAPIView(ListAPIView):

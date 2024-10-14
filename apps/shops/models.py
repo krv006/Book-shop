@@ -75,11 +75,11 @@ class Address(TimeBasedModel):
     country = ForeignKey('shops.Country', CASCADE)
     user = ForeignKey('users.User', RESTRICT)
 
-    def clean(self):
-        if self.phone_number and not self.phone_number.startswith('+'):
-            self.phone_number = self.phone_number.removeprefix('+')
-        if len(self.phone_number) < 16:
-            raise ValidationError('Telefon raqami to\'g\'ri emas.')
+    # def clean(self):
+    #     if self.phone_number and not self.phone_number.startswith('+'):
+    #         self.phone_number = self.phone_number.removeprefix('+')
+    #     if len(self.phone_number) < 16:
+    #         raise ValidationError('Telefon raqami to\'g\'ri emas.')
 
     def __str__(self):
         return f"{self.first_name} - {self.last_name}"

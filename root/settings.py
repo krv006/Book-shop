@@ -234,6 +234,6 @@ CACHES = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'users.backend.EmailBackend',  # Custom backend
-    'django.contrib.auth.backends.ModelBackend',  # Default backend
+    'users.authentication.AdminEmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )

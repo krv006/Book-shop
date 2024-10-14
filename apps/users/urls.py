@@ -10,5 +10,7 @@ urlpatterns = [
 
     path('auth/register', RegisterCreateAPIView.as_view(), name='register'),
     path('login/', LoginAPIView.as_view(), name='login'),
+    # path('customtoken/', CustomTokenObtainPairView, name='custom-token'),
+    # path('activate/<uidb64>/<token>/', ActivateUserView.as_view(), name='activate'),
 
 ]

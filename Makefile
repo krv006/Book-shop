@@ -8,3 +8,6 @@ admin:
 load_data:
 	python3 manage.py loaddata country.json
 	python3 manage.py loaddata user.json
+
+celery:
+	celery -A root worker -l INFO

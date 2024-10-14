@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class EmailBackend(ModelBackend):
+class AdminEmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         if username:
             if not username.endswith('@gmail.com'):

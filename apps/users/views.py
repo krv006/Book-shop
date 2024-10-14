@@ -1,11 +1,18 @@
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.http import urlsafe_base64_decode
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.generics import ListAPIView, UpdateAPIView, CreateAPIView, GenericAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, UserWishlist
+from users.email_service import ActivationEmailService
+from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, UserWishlist, \
+    CustomTokenObtainPairSerializer
 
 from users.models import User
 from users.serializers import UserModelSerializer
@@ -40,6 +47,11 @@ class RegisterCreateAPIView(CreateAPIView):
     serializer_class = RegisterUserModelSerializer
     permission_classes = AllowAny,
 
+    def perform_create(self, serializer):
+        user = serializer.save()
+        activation_service = ActivationEmailService(user)
+        activation_service.send_activation_email()
+
 
 @extend_schema(tags=['login-register'])
 class LoginAPIView(GenericAPIView):
@@ -55,3 +67,29 @@ class LoginAPIView(GenericAPIView):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }, status=status.HTTP_200_OK)
+
+#
+# @extend_schema(tags=['access-token'])
+# class ActivateUserView(APIView):
+#     def get(self, request, uidb64, token):
+#         try:
+#             uid = urlsafe_base64_decode(uidb64).decode()
+#             user = User.objects.get(pk=uid)
+#         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+#             user = None
+#
+#         if user and PasswordResetTokenGenerator().check_token(user, token):
+#             user.is_active = True
+#             user.save()
+#
+#             refresh = RefreshToken.for_user(user)
+#             return Response({
+#                 'refresh': str(refresh),
+#                 'access': str(refresh.access_token),
+#             })
+#         raise AuthenticationFailed('Havola yaroqsiz yoki muddati o‘tgan.')
+#
+#
+# @extend_schema(tags=['access-token'])
+# class CustomTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = CustomTokenObtainPairSerializer

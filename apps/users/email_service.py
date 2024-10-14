@@ -4,6 +4,10 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.conf import settings
 
+from celery import shared_task
+
+from users.task import send_activation_email_task
+
 
 class ActivationEmailService:
     def __init__(self, user):
@@ -13,7 +17,7 @@ class ActivationEmailService:
     def generate_activation_link(self):
         token = self.token_generator.make_token(self.user)
         uid = urlsafe_base64_encode(force_bytes(self.user.pk))
-        return f"http://127.0.0.1:8000/activate/{uid}/{token}/"
+        return f"http://127.0.0.1:8000/activate/{uid}/{token}/"  # todo http://127.0.0.1:8000 mana shu yerga request qoyish kerak
 
     def send_activation_email(self):
         activation_link = self.generate_activation_link()
@@ -21,4 +25,5 @@ class ActivationEmailService:
         message = f'Hurmatli {self.user.email}, ro‘yxatdan o‘tishni yakunlash uchun quyidagi havolani bosing: {activation_link}'
         recipient_list = [self.user.email]
 
-        send_mail(subject, message, settings.EMAIL_HOST_USER, recipient_list)
+        # send_mail(subject, message, settings.EMAIL_HOST_USER, recipient_list)
+        send_activation_email_task.delay(subject, message, recipient_list)
