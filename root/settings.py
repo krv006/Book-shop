@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -232,8 +233,3 @@ CACHES = {
         },
     }
 }
-
-AUTHENTICATION_BACKENDS = (
-    'users.authentication.AdminEmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)

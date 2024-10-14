@@ -8,6 +8,6 @@ router = DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('address/', AddressListCreateAPIView.as_view()),
-    path('country/', CountryListAPIView.as_view()),
+    path('address', AddressListCreateAPIView.as_view()),
+    path('country', CountryListAPIView.as_view()),
 ]

@@ -18,12 +18,20 @@ django-mptt = "^0.16.0"
 pillow = "^10.4.0"
 django-ckeditor-5 = "^0.2.13"
 djangorestframework-simplejwt = "^5.3.1"
-celery = {extras = ["redis"], version = "^5.4.0"}
+celery = { extras = ["redis"], version = "^5.4.0" }
 django-celery-results = "^2.5.1"
 rediscache = "^1.0.0"
 django-redis = "^5.4.0"
 
+[tool.isort]
+profile = "hug"
+src_paths = ["isort", "test"]
 
+# pyproject.toml
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "root.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+#testpaths
 
 [build-system]
 requires = ["poetry-core"]
