@@ -16,7 +16,7 @@ from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer,
 
 
 @extend_schema(tags=['user'])
-class   UserUpdateAPIView(UpdateAPIView):
+class UserUpdateAPIView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
     permission_classes = IsAuthenticated,
