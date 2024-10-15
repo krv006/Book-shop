@@ -11,11 +11,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from users.email_service import ActivationEmailService
 from users.models import User
-from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, UserWishlist
+from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, \
+    UserWishlist
 
 
 @extend_schema(tags=['user'])
-class UserUpdateAPIView(UpdateAPIView):
+class   UserUpdateAPIView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
     permission_classes = IsAuthenticated,

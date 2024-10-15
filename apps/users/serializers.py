@@ -14,16 +14,39 @@ class UserModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class UserUpdateSerializer(ModelSerializer):
+    confirm_password = CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ['email', 'password', 'confirm_password', 'first_name']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def validate(self, data):
+        # Password va confirm_password ni tekshirish
+        if data['password'] != data['confirm_password']:
+            raise ValidationError("Passwords do not match.")
+        return data
+
+    def update(self, instance, validated_data):
+        # Parolni yangilash
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
+            validated_data.pop('confirm_password', None)
+
+        # Boshqa ma'lumotlarni yangilash
+        instance.email = validated_data.get('email', instance.email)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.save()
+        return instance
+
+
 class UserWishlist(ModelSerializer):
     class Meta:
         model = User
         fields = 'wishlist',
-
-
-class UserUpdateSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email', 'password', 'first_name']
 
 
 class RegisterUserModelSerializer(ModelSerializer):
@@ -65,6 +88,3 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['email'] = user.email
         return token
-
-
-
