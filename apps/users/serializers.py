@@ -23,7 +23,7 @@ class UserWishlist(ModelSerializer):
 class UserUpdateSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['email', 'password', 'first_name']
 
 
 class RegisterUserModelSerializer(ModelSerializer):
