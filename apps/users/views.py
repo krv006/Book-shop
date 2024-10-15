@@ -25,9 +25,6 @@ class UserUpdateAPIView(UpdateAPIView):
         return self.request.user
 
 
-
-
-
 @extend_schema(tags=['user'])
 class UserWishlistCreateAPIViewDestroyAPIView(CreateAPIView, DestroyAPIView):
     queryset = User.objects.all()

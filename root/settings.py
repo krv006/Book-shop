@@ -232,7 +232,8 @@ EMAIL_HOST_USER = 'rvkamronbek@gmail.com'
 EMAIL_HOST_PASSWORD = 'lsjw bobj kams uzam'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_CACHE_BACKEND = 'default'
 
 CACHES = {
