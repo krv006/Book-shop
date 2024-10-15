@@ -12,8 +12,14 @@ app.autodiscover_tasks()
 
 app.conf.update(
     broker_connection_retry_on_startup=True,
+    timezone='Asia/Tashkent'
 )
 
+
+# app.conf.enable_utc = False
+# app.conf.update(timezone = 'Asia/Kolkata')
+# app.config_from_object(settings, namespace='CELERY')
+# app.autodiscover_tasks()
 
 @app.task(bind=True, ignore_result=True)
 def debug_task(self):
