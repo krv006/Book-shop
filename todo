@@ -45,3 +45,4 @@ python3 manage.py migrate
 
 
 todo celery ni run qib qoyish kerak register bolganda
+todo is_active true qib qoyish kerak

@@ -22,6 +22,7 @@ celery = { extras = ["redis"], version = "^5.4.0" }
 django-celery-results = "^2.5.1"
 rediscache = "^1.0.0"
 django-redis = "^5.4.0"
+faker = "^30.6.0"
 
 [tool.isort]
 profile = "hug"

@@ -56,6 +56,7 @@ class Review(TimeBasedModel):
 
 class Country(Model):
     name = CharField(max_length=255)
+    code = CharField(max_length=255)
 
     def __str__(self):
         return self.name
