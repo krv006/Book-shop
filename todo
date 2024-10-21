@@ -68,3 +68,13 @@ todo is_active true qib qoyish kerak
 
 request.get('https://bank.uz/') -> mana shunday qilib api di ovolish kerak boladi
 https://nbu.uz/uz/exchange-rates/json/ -> 2 chi variant uchun shu kerak boladi
+
+
+
+Joriy kundagi valyuta kurslari uchun:
+https://cbu.uz/uz/arkhiv-kursov-valyut/xml/
+
+Muayyan sana uchun barcha valyutalar kurslari:
+https://cbu.uz/uz/arkhiv-kursov-valyut/xml/all/YYYY-MM-DD/
+
+Masalan, 2024-yil 18-oktabrdagi valyuta kurslari uchun quyidagi havolani ishlatishingiz mumkin: https://cbu.uz/uz/arkhiv-kursov-valyut/xml/all/2024-10-18/

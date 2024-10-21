@@ -1,9 +1,12 @@
 from django.urls import path
 
 from users.views import UserUpdateAPIView, RegisterCreateAPIView, LoginAPIView, \
-    UserWishlistCreateAPIViewDestroyAPIView, ActivateUserView
+    UserWishlistCreateAPIViewDestroyAPIView, ActivateUserView, AddressListCreateAPIView, AddressDestroyUpdateAPIView
 
 urlpatterns = [
+    path('address', AddressListCreateAPIView.as_view(), name='address_list'),
+    path('address/<int:pk>', AddressDestroyUpdateAPIView.as_view(), name='address_detail'),
+
     path('update-user', UserUpdateAPIView.as_view(), name='update-user'),
     path('user-wishlist', UserWishlistCreateAPIViewDestroyAPIView.as_view(), name='wishlist-user'),
 
