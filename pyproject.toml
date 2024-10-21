@@ -23,6 +23,7 @@ django-celery-results = "^2.5.1"
 rediscache = "^1.0.0"
 django-redis = "^5.4.0"
 faker = "^30.6.0"
+requests = "^2.32.3"
 
 [tool.isort]
 profile = "hug"
