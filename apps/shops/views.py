@@ -11,7 +11,7 @@ from shops.serializers import CountryModelSerializer, AddressListModelSerializer
 from users.models import User
 
 
-@extend_schema(tags=['shops'])
+@extend_schema(tags=['users'])
 class AddressListCreateAPIView(ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressListModelSerializer
@@ -21,7 +21,7 @@ class AddressListCreateAPIView(ListCreateAPIView):
         return super().get_queryset().filter(user=self.request.user)
 
 
-@extend_schema(tags=['shops'])
+@extend_schema(tags=['users'])
 class AddressDestroyUpdateAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, GenericAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressListModelSerializer
