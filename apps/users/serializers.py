@@ -83,6 +83,7 @@ class LoginUserModelSerializer(Serializer):
         attrs['user'] = user
         return attrs
 
+
 class AddressListModelSerializer(ModelSerializer):
     user = HiddenField(default=CurrentUserDefault())
     postal_code = IntegerField(default=123400, min_value=0)
@@ -99,6 +100,11 @@ class AddressListModelSerializer(ModelSerializer):
 
         _address = super().create(validated_data)
         _user: User = _address.user
+        if _user.address_set.count() < 2:
+            _user.billing_address = _address
+            _user.shipping_address = _address
+            _user.save()
+
         if _has_billing_address:
             _user.billing_address = _address
             _user.save()
