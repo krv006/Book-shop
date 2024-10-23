@@ -2,7 +2,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, mixins
-from rest_framework.generics import ListCreateAPIView, GenericAPIView
+from rest_framework.generics import ListCreateAPIView, GenericAPIView, ListAPIView
 from rest_framework.generics import UpdateAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
@@ -13,10 +13,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from shops.models import Address
 from users.email_service import ActivationEmailService
-from users.models import User
+from users.models import User, Author
 from shared.paginations import CustomPageNumberPagination
 from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, \
-    UserWishlist, AddressListModelSerializer
+    UserWishlist, AddressListModelSerializer, AuthorDetailModelSerializer
 
 
 @extend_schema(tags=['user'])
@@ -100,7 +100,9 @@ class AddressListCreateAPIView(ListCreateAPIView):
     permission_classes = IsAuthenticated,
 
     def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user)
+        qs = super().get_queryset()
+        return qs.filter(user=self.request.user).order_by('address')
+        # return super().get_queryset().filter(user=self.request.user)
 
 
 @extend_schema(tags=['users'])
@@ -131,6 +133,7 @@ class AddressDestroyUpdateAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMi
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({"message": "O'chirib bo'lmaydi!"})
+
 
 # @extend_schema(tags=['access-token'])
 # class CustomTokenObtainPairView(TokenObtainPairView):

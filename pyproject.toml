@@ -24,6 +24,7 @@ rediscache = "^1.0.0"
 django-redis = "^5.4.0"
 faker = "^30.6.0"
 requests = "^2.32.3"
+django-jsonform = "^2.23.1"
 
 [tool.isort]
 profile = "hug"

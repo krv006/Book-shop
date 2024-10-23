@@ -5,9 +5,15 @@ from rest_framework.fields import HiddenField, CurrentUserDefault, CharField, Em
 from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from shops.models import Address
-from shops.serializers import CountryModelSerializer
-from users.models import User, LoginAttempt
+from shops.models import Address, Country
+
+from users.models import User, LoginAttempt, Author
+
+
+class CountryModelSerializer(ModelSerializer):
+    class Meta:
+        model = Country
+        exclude = ()
 
 
 class UserModelSerializer(ModelSerializer):
@@ -167,3 +173,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['email'] = user.email
         return token
+
+
+class AuthorModelSerializer(ModelSerializer):
+    class Meta:
+        model = Author
+        exclude = 'description',
+
+
+class AuthorDetailModelSerializer(ModelSerializer):
+    class Meta:
+        model = Author
+        fields = '__all__'

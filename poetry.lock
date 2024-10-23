@@ -413,6 +413,20 @@ django = ">=3.2"
 tests = ["coverage"]
 
 [[package]]
+name = "django-jsonform"
+version = "2.23.1"
+description = "A user-friendly JSON editing form for Django admin."
+optional = false
+python-versions = ">=3.4"
+files = [
+    {file = "django_jsonform-2.23.1-py3-none-any.whl", hash = "sha256:cd5900c9f4f69d90a40b3a495aeb66bf43f562b82bfb64be40a78a51bbc04a11"},
+    {file = "django_jsonform-2.23.1.tar.gz", hash = "sha256:b75ea31263fbdde7190c1b02422587208359b19b1a9babc15ec3ed8260b26af9"},
+]
+
+[package.dependencies]
+django = ">=2.0"
+
+[[package]]
 name = "django-mptt"
 version = "0.16.0"
 description = "Utilities for implementing Modified Preorder Tree Traversal with your Django Models and working with trees of Model instances."
@@ -1193,4 +1207,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b67f8fae2eb1677864f5f9667f2b1dcc87e91222ae1fa71f345f65dfa8aa4f14"
+content-hash = "99010ae2cfe2429d4e40feaf7ca193728e47a7a0528ef414eab6501ded731d8b"

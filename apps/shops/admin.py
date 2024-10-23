@@ -1,8 +1,9 @@
+
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
-from shops.models import Book, Address
-from shops.models import Category
+from shops.models import Category, Book, Section
 
 
 @admin.register(Category)
@@ -11,10 +12,11 @@ class CategoryModelAdmin(DraggableMPTTAdmin):
 
 
 @admin.register(Book)
-class BookAdmin(admin.ModelAdmin):
-    pass
+class BookModelAdmin(ModelAdmin):
+    list_display = ['slug', 'title']
+    autocomplete_fields = ['author']
 
 
-@admin.register(Address)
-class AddressModelAdmin(admin.ModelAdmin):
+@admin.register(Section)
+class SectionModelAdmin(ModelAdmin):
     pass

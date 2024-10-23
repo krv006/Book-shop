@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'rest_framework_simplejwt',
     'django_celery_results',
+    'django_jsonform'
 
 ]
 
@@ -116,11 +117,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR / 'static')
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -27,3 +27,7 @@ fake:
 	python3 manage.py generate_data --address 5
 	python3 manage.py generate_data --book 5
 	python3 manage.py generate_data --author 5
+
+migdel:
+	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+	find . -path "*/migrations/*.pyc"  -delete
