@@ -26,8 +26,8 @@ class Category(MPTTModel):
 
 class Book(SlugTimeBasedModel):
     class Format(TextChoices):
-        HARDCOVER = 'hardcover', 'Hardcover'
-        PAPERCOVER = 'pepercover', 'Pepercover'
+        HARD_COVER = 'hard_cover', 'Hard cover'
+        PAPER_COVER = 'paper_cover', 'Paper cover'
 
     overview = CKEditor5Field()
     features = JSONField()

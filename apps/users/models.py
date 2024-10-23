@@ -1,9 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractUser
-from django.db.models import EmailField, BooleanField, OneToOneField, RESTRICT
+from django.db.models import EmailField, BooleanField, OneToOneField, RESTRICT, DateTimeField, IntegerField, CASCADE
 from django.db.models import Model, CharField, ManyToManyField
 from django_ckeditor_5.fields import CKEditor5Field
-
+from django.utils import timezone
+from datetime import timedelta
 from users.managers import CustomUserManager
 
 
@@ -30,3 +31,28 @@ class Author(Model):
 
     def __str__(self):
         return f"{self.first_name}{self.last_name}"
+
+
+class LoginAttempt(Model):
+    user = OneToOneField('users.User', CASCADE)
+    attempts = IntegerField(default=0)
+    last_attempt_time = DateTimeField(null=True, blank=True)
+    blocked_until = DateTimeField(null=True, blank=True)
+
+    def block_for_five_minutes(self):
+        self.blocked_until = timezone.now() + timedelta(minutes=5)
+        self.save()
+
+    def reset_attempts(self):
+        self.attempts = 0
+        self.save()
+
+    def increment_attempts(self):
+        self.attempts += 1
+        self.last_attempt_time = timezone.now()
+        self.save()
+
+    def is_blocked(self):
+        if self.blocked_until and self.blocked_until > timezone.now():
+            return True
+        return False

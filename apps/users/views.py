@@ -14,6 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from shops.models import Address
 from users.email_service import ActivationEmailService
 from users.models import User
+from shared.paginations import CustomPageNumberPagination
 from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, \
     UserWishlist, AddressListModelSerializer
 
@@ -23,6 +24,7 @@ class UserUpdateAPIView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
     permission_classes = IsAuthenticated,
+    pagination_class = CustomPageNumberPagination
 
     def get_object(self):
         return self.request.user

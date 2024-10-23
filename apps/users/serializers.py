@@ -7,7 +7,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from shops.models import Address
 from shops.serializers import CountryModelSerializer
-from users.models import User
+from users.models import User, LoginAttempt
 
 
 class UserModelSerializer(ModelSerializer):
@@ -70,16 +70,54 @@ class RegisterUserModelSerializer(ModelSerializer):
         return attrs
 
 
+# class LoginUserModelSerializer(Serializer):
+#     email = EmailField()
+#     password = CharField(write_only=True)
+#
+#     def validate(self, attrs):
+#         email = attrs.get('email')
+#         password = attrs.get('password')
+#         user = authenticate(username=email, password=password)
+#         if user is None:
+#             raise ValidationError("Invalid email or password")
+#         attrs['user'] = user
+#         return attrs
+
+
 class LoginUserModelSerializer(Serializer):
     email = EmailField()
     password = CharField(write_only=True)
 
+    # def validate(self, attrs):
+    #     email = attrs.get('email')
+    #     password = attrs.get('password')
+    #     user = authenticate(username=email, password=password)
+    #     if user is None:
+    #         raise ValidationError("Invalid email or password")
+    #     attrs['user'] = user
+    #     return attrs
+    # ======================
+
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise ValidationError("Invalid email or password")
+        login_attempt, created = LoginAttempt.objects.get_or_create(user=user)
+        if login_attempt.is_blocked():
+            raise ValidationError("Foydalanuvchi 5 daqiqa bloklangan!")
         user = authenticate(username=email, password=password)
         if user is None:
+            login_attempt.increment_attempts()
+
+            if login_attempt.attempts >= 3:
+                login_attempt.block_for_five_minutes()
+                raise ValidationError("Siz 3 marta noto'g'ri kiritdingiz. 5 daqiqaga bloklandingiz!")
+
             raise ValidationError("Invalid email or password")
+        login_attempt.reset_attempts()
         attrs['user'] = user
         return attrs
 
