@@ -28,10 +28,10 @@ Task
 6.1✅ address qoshish va listini olish apisi
 6.2✅ edit va ochirish 1tadan kop bolsa (edit qilishda faqat patch bolsin)
 6.3✅ ochirishda default turganlarni ochira olmasligi
-6.4❎ listini chiqarishda 1chi defaultlar chiqish keyin name ni alfabit boyicha -> chumadim
+6.4❎ listini chiqarishda 1chi defaultlar chiqish keyin name ni alfabit boyicha -> address lardiki chiqishi kerak
 6.5✅ default billing no delete, no edit
 6.6✅ default shipping no delete
-6.7 currency (uzs, usd) (bank.uz) -> api olindi qayerga qoyishdi chumadim api ni
+6.7❎ currency (uzs, usd) (bank.uz) -> api olindi qayerga qoyishdi chumadim api ni
 7.❎ database backup docker based
 8.✅ django custom admin
 
