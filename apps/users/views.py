@@ -1,4 +1,7 @@
+from time import time
+
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.db.models import When, BooleanField, Case, F
 from django.utils.http import urlsafe_base64_decode
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, mixins
@@ -74,14 +77,16 @@ class LoginAPIView(GenericAPIView):
 
 
 @extend_schema(tags=['access-token'])
-class ActivateUserView(APIView):
+class UserActivateAPIView(APIView):
     serializer_class = None
     authentication_classes = ()
 
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
-            uid, is_active = uid.split('/')
+            uid, is_active, _created_at = uid.split('/')
+            if int(time()) - int(_created_at) > 259200:
+                raise AuthenticationFailed('Havola yaroqsiz yoki muddati o‘tgan.')
             user = User.objects.get(pk=uid, is_active=is_active)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
@@ -101,8 +106,23 @@ class AddressListCreateAPIView(ListCreateAPIView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(user=self.request.user).order_by('address')
-        # return super().get_queryset().filter(user=self.request.user)
+        user = self.request.user
+        return (
+            qs.filter(user=user)
+            .annotate(
+                shipping_address_id=Case(
+                    When(user__shipping_address_id=F('id'), then=False),
+                    default=True,
+                    output_field=BooleanField()
+                ),
+                billing_address_id=Case(
+                    When(user__billing_address_id=F('id'), then=False),
+                    default=True,
+                    output_field=BooleanField()
+                ),
+            )
+            .order_by('shipping_address_id', 'billing_address_id', 'first_name', 'last_name')
+        )
 
 
 @extend_schema(tags=['users'])

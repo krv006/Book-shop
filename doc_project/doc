@@ -1,0 +1,12 @@
+Django Seed
+    todo shops di orniga esa ozimizdi appimizdi yozamiz
+    postgres sql da bolishi kerak database
+    Django=5.0.1 -> versiyada bolishi kerak
+    USE_TZ = False -> bolishi xam kerak
+    Faker ustiga qurilgan va fake malumot bn toldirib beradi
+
+Model-Bakery
+    todo Bu tez toldirib beradi boshqalarga qaraganda
+    todo musr malumot qoshadi bu
+    Faker bilan bir hil ishlaydigan kutubxona
+    Faker ustiga qurilgan va fake malumot bn toldirib beradi

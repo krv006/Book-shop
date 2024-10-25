@@ -1,0 +1,65 @@
+# Valyutani konvertatsiya qilish uchun maxsus yordamchi funksiya
+def convert_price(price, currency='USD'):
+    exchange_rates = {
+        'USD': 1,
+        'EUR': 0.85,
+        'UZS': 11500,  # Masalan, 1 USD = 11500 UZS
+    }
+    return price * exchange_rates.get(currency, 1)
+
+# BookDetailModelSerializerni yangilash
+class BookDetailModelSerializer(ModelSerializer):
+    author = AuthorDetailModelSerializer(many=True, read_only=True)
+    used_good_price = serializers.SerializerMethodField()
+    ebook_price = serializers.SerializerMethodField()
+    audiobook_price = serializers.SerializerMethodField()
+    new_price = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Book
+        fields = (
+            'title', 'slug', 'author', 'image', 'overview',
+            'used_good_price', 'ebook_price', 'audiobook_price',
+            'reviews_count', 'new_price', 'features'
+        )
+
+    # Har bir narx maydoni uchun serializer methodlarini yaratish
+    def get_used_good_price(self, obj):
+        currency = self.context.get('currency', 'USD')
+        return convert_price(obj.used_good_price, currency)
+
+    def get_ebook_price(self, obj):
+        currency = self.context.get('currency', 'USD')
+        return convert_price(obj.ebook_price, currency)
+
+    def get_audiobook_price(self, obj):
+        currency = self.context.get('currency', 'USD')
+        return convert_price(obj.audiobook_price, currency)
+
+    def get_new_price(self, obj):
+        currency = self.context.get('currency', 'USD')
+        return convert_price(obj.new_price, currency)
+
+# BookDetailAPIViewda context bilan currency yuborish
+@extend_schema(tags=['shops'])
+class BookDetailAPIView(RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookDetailModelSerializer
+    lookup_field = 'slug'
+
+    def get_serializer_context(self):
+        # Foydalanuvchi kirgan bo'lsa, valyutani olib kelish
+        currency = self.request.user.profile.currency if self.request.user.is_authenticated else 'USD'
+        return {'currency': currency}
+
+
+# BookListAPIViewda ham huddi shunday context yuboriladi
+@extend_schema(tags=['shops'])
+class BookListAPIView(ListAPIView):
+    queryset = Book.objects.order_by('-id')
+    serializer_class = BookDetailModelSerializer  # Bu yerda BookListModelSerializerni BookDetailModelSerializerga almashtirdik
+    pagination_class = CustomPageNumberPagination
+
+    def get_serializer_context(self):
+        currency = self.request.user.profile.currency if self.request.user.is_authenticated else 'USD'
+        return {'currency': currency}

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from users.views import UserUpdateAPIView, RegisterCreateAPIView, LoginAPIView, \
-    UserWishlistCreateAPIViewDestroyAPIView, ActivateUserView, AddressListCreateAPIView, AddressDestroyUpdateAPIView, \
+    UserWishlistCreateAPIViewDestroyAPIView, UserActivateAPIView, AddressListCreateAPIView, AddressDestroyUpdateAPIView, \
     AuthorDetailView
 
 urlpatterns = [
@@ -14,7 +14,7 @@ urlpatterns = [
     path('register', RegisterCreateAPIView.as_view(), name='register'),
     path('login', LoginAPIView.as_view(), name='login'),
     # path('custom/token', CustomTokenObtainPairView, name='custom-token'),
-    path('activate/<str:uidb64>/<str:token>', ActivateUserView.as_view(), name='activate'),
+    path('activate/<str:uidb64>/<str:token>', UserActivateAPIView.as_view(), name='activate'),
 
     path('authors/<int:id>/', AuthorDetailView.as_view(), name='author-detail'),
 

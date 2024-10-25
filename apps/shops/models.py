@@ -28,8 +28,8 @@ class Category(MPTTModel):
 
 class Book(SlugTimeBasedModel):
     class Format(TextChoices):
-        HARD_COVER = 'hard_cover', 'Hard cover'
-        PAPER_COVER = 'paper_cover', 'Paper cover'
+        HARD_COVER = 'hard_cover', 'Hard_cover'
+        PAPER_COVER = 'paper_cover', 'Paper_cover'
 
     SCHEMA = {
         'type': 'dict',  # or 'object'
@@ -85,7 +85,7 @@ class Book(SlugTimeBasedModel):
     overview = TextField()
     features = JSONField(schema=SCHEMA)
 
-    # format = CharField(max_length=255, choices=Format, default=Format.HARDCOVER) # todo togirlash kerak buni
+    format = CharField(max_length=255, choices=Format, default=Format.HARD_COVER)  # todo togirlash kerak buni
     used_good_price = DecimalField(help_text='USD da kiritamiz', max_digits=6, decimal_places=2, blank=True, null=True)
     new_price = DecimalField(help_text='USD da kiritamiz', max_digits=6, decimal_places=2, blank=True, null=True)
     ebook_price = DecimalField(help_text='USD da kiritamiz', max_digits=6, decimal_places=2, blank=True, null=True)
@@ -93,6 +93,7 @@ class Book(SlugTimeBasedModel):
     author = ManyToManyField('users.Author', blank=True)
     image = ImageField(upload_to='shops/books/%Y/%m/%d')
     reviews_count = PositiveIntegerField(db_default=0, editable=False)
+    category = ForeignKey('shops.Category', CASCADE, related_name='books')
 
     def save(self, *args, force_insert=False, force_update=False, using=None, update_fields=None):
         self.slug = f"{slugify(self.title)}-{self.features['isbn_13']}"

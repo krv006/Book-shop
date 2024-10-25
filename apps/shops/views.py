@@ -18,11 +18,12 @@ class CountryListAPIView(ListAPIView):
 @extend_schema(tags=['shops'])
 class BookListAPIView(ListAPIView):
     queryset = Book.objects.order_by('-id')
-    serializer_class = BookListModelSerializer
+    serializer_class = BookListModelSerializer  # BookDetailModelSerializer
     pagination_class = CustomPageNumberPagination
 
-    # def get_queryset(self):
-    #     return Book.objects.order_by('id')
+    def get_serializer_context(self):
+        currency = self.request.user.profile.currency if self.request.user.is_authenticated else 'USD'
+        return {'currency': currency}
 
 
 @extend_schema(tags=['shops'])
@@ -30,3 +31,7 @@ class BookDetailAPIView(RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookDetailModelSerializer
     lookup_field = 'slug'
+
+    def get_serializer_context(self):
+        currency = self.request.user.profile.currency if self.request.user.is_authenticated else 'USD'
+        return {'currency': currency}

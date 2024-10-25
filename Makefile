@@ -31,3 +31,11 @@ fake:
 migdel:
 	find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 	find . -path "*/migrations/*.pyc"  -delete
+
+
+data:
+	python3 manage.py generate_data --user 5 --author 5  --address 5  --book 5  --section 5  --review 5 --category 5
+	#python3 manage.py generate_data --user 5 --author 5  --address 5  --book 5  --section 5  --cart 5  --review 5 --category 5
+
+seeder:
+	python3 manage.py seed shops --number=10 # todo shops di orniga esa ozimizdi appimizdi yozamiz

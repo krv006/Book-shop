@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'rest_framework_simplejwt',
     'django_celery_results',
-    'django_jsonform'
+    'django_jsonform',
+    'django_seed',
 
 ]
 
@@ -70,23 +71,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'root.wsgi.application'
 AUTH_USER_MODEL = 'users.User'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": os.getenv('PG_DB_NAME'),
-#         "USER": os.getenv('PG_USER'),
-#         "PASSWORD": os.getenv('PG_PASSWORD'),
-#         "HOST": os.getenv('PG_HOST'),
-#         "PORT": os.getenv('PG_PORT'),
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv('PG_DB_NAME'),
+        "USER": os.getenv('PG_USER'),
+        "PASSWORD": os.getenv('PG_PASSWORD'),
+        "HOST": os.getenv('PG_HOST'),
+        "PORT": os.getenv('PG_PORT'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -116,6 +117,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# USE_TZ = False # todo work in seeder-faker
 
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

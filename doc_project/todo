@@ -37,7 +37,7 @@ Task
 
 task
 1.✅ book detail api slug boyicha (romney-a-reckoning-9781982196202)
-2. author detail api
+2.✅ author detail api
 3. book detail va listda (default holatda usd boyicha, login qilgan bolsa user, currency boyicha book price ni chiqarish)
 4. barcha modellarga ntadan data qo'shish
     4.1 faker orqali (modellarni qarab togrilash)
@@ -88,3 +88,15 @@ Masalan, 2024-yil 18-oktabrdagi valyuta kurslari uchun quyidagi havolani ishlati
 todo api.py da code bor shuni book api ga togri qoyish kerak boladi
 
 edition
+
+
+faker da
+    def _section(self):
+        return Section(
+            name_image=self.f.image_url(),
+            intro=self.f.text(),
+            banner=self.f.image_url(),
+        )
+
+mana shu malumotlarni fake qilib toldirilepti endi shuni seeder da yozib ber
+
