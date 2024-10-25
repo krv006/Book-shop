@@ -1,10 +1,9 @@
 from dateutil.tz import UTC
-
 from django.contrib.auth.hashers import make_password
 from django.core.management.base import BaseCommand
 from faker.proxy import Faker
 
-from shops.models import Category, Address, Country
+from shops.models import Address, Country
 from users.models import User, Author
 
 

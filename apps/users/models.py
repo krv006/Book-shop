@@ -1,11 +1,12 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractUser
 from django.db.models import EmailField, BooleanField, OneToOneField, RESTRICT, DateTimeField, IntegerField, CASCADE, \
     TextField
 from django.db.models import Model, CharField, ManyToManyField
-from django_ckeditor_5.fields import CKEditor5Field
 from django.utils import timezone
-from datetime import timedelta
+
 from users.managers import CustomUserManager
 
 

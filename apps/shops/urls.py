@@ -15,4 +15,3 @@ urlpatterns = [
     path('books/<str:slug>', BookDetailAPIView.as_view(), name='book-detail'),
 
 ]
-

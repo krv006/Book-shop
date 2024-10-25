@@ -1,5 +1,4 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework.exceptions import NotFound
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from shared.paginations import CustomPageNumberPagination

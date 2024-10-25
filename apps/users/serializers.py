@@ -6,7 +6,6 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from shops.models import Address, Country
-
 from users.models import User, LoginAttempt, Author
 
 

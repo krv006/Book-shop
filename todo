@@ -36,7 +36,7 @@ Task
 8.✅ django custom admin
 
 task
-1. book detail api slug boyicha (romney-a-reckoning-9781982196202)
+1.✅ book detail api slug boyicha (romney-a-reckoning-9781982196202)
 2. author detail api
 3. book detail va listda (default holatda usd boyicha, login qilgan bolsa user, currency boyicha book price ni chiqarish)
 4. barcha modellarga ntadan data qo'shish

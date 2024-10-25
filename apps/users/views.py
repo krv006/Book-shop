@@ -2,7 +2,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, mixins
-from rest_framework.generics import ListCreateAPIView, GenericAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, GenericAPIView, RetrieveAPIView
 from rest_framework.generics import UpdateAPIView, CreateAPIView, DestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
@@ -11,10 +11,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from shared.paginations import CustomPageNumberPagination
 from shops.models import Address
 from users.email_service import ActivationEmailService
 from users.models import User, Author
-from shared.paginations import CustomPageNumberPagination
 from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, \
     UserWishlist, AddressListModelSerializer, AuthorDetailModelSerializer
 
@@ -135,6 +135,15 @@ class AddressDestroyUpdateAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMi
         return Response({"message": "O'chirib bo'lmaydi!"})
 
 
-# @extend_schema(tags=['access-token'])
-# class CustomTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = CustomTokenObtainPairSerializer
+@extend_schema(tags=['author-datail'])
+class AuthorDetailView(RetrieveAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorDetailModelSerializer
+    lookup_field = 'id'
+
+
+"""
+@extend_schema(tags=['access-token'])
+class CustomTokenObtainPairView(TokenObtainPairView):
+     serializer_class = CustomTokenObtainPairSerializer
+"""

@@ -32,5 +32,3 @@ class ActivationEmailService:
         to = self.user.email
 
         send_activation_email_task.delay(subject, plain_message, [to], html_message=html_message)
-
-    

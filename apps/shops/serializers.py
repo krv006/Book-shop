@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from shops.models import Country, Book
+from shops.models import Book
 from users.serializers import AuthorModelSerializer, AuthorDetailModelSerializer
 
 
