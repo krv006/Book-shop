@@ -10,3 +10,15 @@ Model-Bakery
     todo musr malumot qoshadi bu
     Faker bilan bir hil ishlaydigan kutubxona
     Faker ustiga qurilgan va fake malumot bn toldirib beradi
+
+todo Faker worked
+todo Email one time link
+todo celery
+todo cpu bank api with worked currency
+todo address order by shipping address and billing address
+todo Email send verification code for login register
+todo custom admin
+todo login django default admin with admin@gmail.com(admin)
+todo JWT token refresh and access -> With Login
+todo celery run running project
+todo is_active true for database (with add faker egyptian reference)
