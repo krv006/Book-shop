@@ -44,6 +44,11 @@ task
     4.2✅ django seed
 5.✅ wishlist & cart apilarini chiqarish
 
+TODO ozim
+6. book order and order item
+7. cart model -> 100%
+
+
 
 #takrorlash
 models (https://docs.djangoproject.com/en/5.1/ref/models/fields/#field-options)

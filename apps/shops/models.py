@@ -1,6 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import CharField, CASCADE, TextField, ImageField, Model, ForeignKey, TextChoices, \
-    DecimalField, PositiveIntegerField, PositiveSmallIntegerField, ManyToManyField, BooleanField, RESTRICT
+    DecimalField, PositiveIntegerField, PositiveSmallIntegerField, ManyToManyField, BooleanField, RESTRICT, DateField
 from django.utils.text import slugify
 from django_jsonform.models.fields import JSONField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -161,3 +161,28 @@ class Cart(TimeBasedModel):
 
     def __str__(self):
         return f"{self.owner} - {self.book}"
+
+
+class Order(TimeBasedModel):
+    class PaymentMethod(TextChoices):
+        PAYPAL = 'paypal', 'Paypal'
+        CREDIT_CARD = 'credit_card', 'Credit_card'
+
+    payment_method = CharField(max_length=255, choices=PaymentMethod)
+    owner = ForeignKey('users.User', CASCADE, related_name='orders')
+    address = ForeignKey('shops.Address', CASCADE, related_name='orders')
+    coupon_code = PositiveIntegerField(db_default=0)
+
+
+class OrderItem(Model):
+    book = ForeignKey('shops.Book', CASCADE, related_name='order_item')
+    order = ForeignKey('shops.Order', CASCADE, related_name='order_item')
+    quantity = PositiveIntegerField(db_default=0)
+
+
+class CreditCard(Model):
+    order = ForeignKey('apps.Order', CASCADE)
+    number = CharField(max_length=255)
+    cvv = CharField(max_length=255)
+    expire_date = DateField()
+    owner = ForeignKey('apps.User', CASCADE)
