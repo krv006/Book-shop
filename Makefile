@@ -16,7 +16,8 @@ user:
 	python3 manage.py createsuperuser --email admin@gmail.com
 
 celery:
-	celery -A root worker -l INFO
+	celery -A root worker -l INFO --concurrency=4 -Q high_priority -n worker1
+	celery -A root worker -l INFO --concurrency=1 -Q low_priority -n worker3
 
 check:
 	flake8 .
@@ -39,3 +40,6 @@ data:
 
 seeder:
 	python3 manage.py seed shops --number=10 # todo shops di orniga esa ozimizdi appimizdi yozamiz
+
+
+#10.10.3.122:8000/api/v1/users/register?email=rvkamronbek@gmail.com

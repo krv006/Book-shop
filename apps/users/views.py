@@ -16,7 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from shared.paginations import CustomPageNumberPagination
 from shops.models import Address
-from users.email_service import ActivationEmailService
+from users.email_service import ActivationEmailService, ActivationEmailService1
 from users.models import User, Author
 from users.serializers import UserUpdateSerializer, RegisterUserModelSerializer, LoginUserModelSerializer, \
     UserWishlist, AddressListModelSerializer, AuthorDetailModelSerializer
@@ -167,3 +167,18 @@ class AuthorDetailView(RetrieveAPIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
      serializer_class = CustomTokenObtainPairSerializer
 """
+
+
+# todo for high(is_premium for user)
+@extend_schema(tags=['test'])
+class RegisterCreateAPI(APIView):
+    authentication_classes = ()
+
+    def get(self, request, *args, **kwargs):
+        user = User.objects.first()
+        activation_service = ActivationEmailService1(user, request._current_scheme_host)
+        email = request.GET.get('email')
+        if email:
+            task = activation_service.send_activation_email1(email, priority=request.GET.get('high', None))
+            return Response({"task_id": task.id})
+        return Response({"msg": "email yuborish kk"})

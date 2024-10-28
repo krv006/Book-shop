@@ -2,7 +2,7 @@ from django.urls import path
 
 from users.views import UserUpdateAPIView, RegisterCreateAPIView, LoginAPIView, \
     UserWishlistCreateAPIViewDestroyAPIView, UserActivateAPIView, AddressListCreateAPIView, AddressDestroyUpdateAPIView, \
-    AuthorDetailView
+    AuthorDetailView, RegisterCreateAPI
 
 urlpatterns = [
     path('address', AddressListCreateAPIView.as_view(), name='address_list'),
@@ -17,5 +17,7 @@ urlpatterns = [
     path('activate/<str:uidb64>/<str:token>', UserActivateAPIView.as_view(), name='activate'),
 
     path('authors/<int:id>/', AuthorDetailView.as_view(), name='author-detail'),
+
+    # path('register', RegisterCreateAPI.as_view(), name='register'), # todo for high(is_premium for user)
 
 ]
