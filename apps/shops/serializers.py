@@ -2,7 +2,7 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.serializers import ModelSerializer
 
 from shared.utils import get_currency_rates, get_currency
-from shops.models import Book
+from shops.models import Book, Order
 from users.serializers import AuthorModelSerializer, AuthorDetailModelSerializer
 
 
@@ -52,3 +52,9 @@ class BookListModelSerializer(ModelSerializer):
     class Meta:
         model = Book
         fields = ('title', 'slug', 'author', 'image')
+
+
+class OrderModelSerializer(ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'

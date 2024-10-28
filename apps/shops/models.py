@@ -4,8 +4,10 @@ from django.db.models import CharField, CASCADE, TextField, ImageField, Model, F
 from django.utils.text import slugify
 from django_jsonform.models.fields import JSONField
 from mptt.models import MPTTModel, TreeForeignKey
+from django.db.models import Model, ForeignKey, CASCADE, CharField, DateField, PositiveIntegerField
 
 from shared.model import TimeBasedModel, SlugTimeBasedModel
+from users.models import User
 
 
 class Section(TimeBasedModel):
@@ -177,12 +179,12 @@ class Order(TimeBasedModel):
 class OrderItem(Model):
     book = ForeignKey('shops.Book', CASCADE, related_name='order_item')
     order = ForeignKey('shops.Order', CASCADE, related_name='order_item')
-    quantity = PositiveIntegerField(db_default=0)
+    quantity = PositiveIntegerField(default=0)
 
 
 class CreditCard(Model):
-    order = ForeignKey('apps.Order', CASCADE)
+    order = ForeignKey('shops.Order', CASCADE)
     number = CharField(max_length=255)
     cvv = CharField(max_length=255)
     expire_date = DateField()
-    owner = ForeignKey('apps.User', CASCADE)
+    owner = ForeignKey('users.User', CASCADE)
