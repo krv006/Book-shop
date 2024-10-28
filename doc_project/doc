@@ -21,5 +21,6 @@ todo custom admin
 todo login django default admin with admin@gmail.com(admin)
 todo JWT token refresh and access -> With Login
 todo celery run running project
+todo celery task removed in the cache (3 days, 5 minutes and other)
 todo is_active true for database (with add faker egyptian reference)
 todo ActivationEmailService1 this is work high(is_premium for user)
