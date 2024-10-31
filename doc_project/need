@@ -63,3 +63,22 @@ class BookListAPIView(ListAPIView):
     def get_serializer_context(self):
         currency = self.request.user.profile.currency if self.request.user.is_authenticated else 'USD'
         return {'currency': currency}
+
+
+python3 manage.py dbshell -> database ga togri otib ketadi
+
+name -> postgres -> deb qoyib unga otib kein ichidan database ochamiz
+
+########################################################
+
+abstract - True -> database korinmaydi
+
+proxy - True -> esa admindan chiqadi lekin database dan chiqmaydi
+
+########################################################
+
+indexses database di tez ishlashiga yordam beradi
+
+########################################################
+
+django defaaoult da faqat bitta manager booladi -> objects

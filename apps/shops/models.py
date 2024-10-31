@@ -170,10 +170,14 @@ class Order(TimeBasedModel):
         PAYPAL = 'paypal', 'Paypal'
         CREDIT_CARD = 'credit_card', 'Credit_card'
 
+    class Gift(TextChoices):
+        GIFTCERTIFICATE = 'giftcertificate', 'GiftCertificate'
+
     payment_method = CharField(max_length=255, choices=PaymentMethod)
+    coupon_code = PositiveIntegerField(db_default=0)
+    gift = BooleanField(choices=Gift, default=False) # todo bu ni oylash kerak
     owner = ForeignKey('users.User', CASCADE, related_name='orders')
     address = ForeignKey('shops.Address', CASCADE, related_name='orders')
-    coupon_code = PositiveIntegerField(db_default=0)
 
 
 class OrderItem(Model):
