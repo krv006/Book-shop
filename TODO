@@ -1,0 +1,45 @@
+data types  ,  unpacking , packing  , mutable , immutable
+collections, itertools, os
+list, dict, set comprehension
+function, lambda ....
+scope
+dataclasses
+OOP principles
+slots
+dunder methods
+Threads/multiprocessing/Async
+concurrency/parallelism
+
+Gil global inteperet lock
+logging
+
+Postgres
+subquery, group by, all join
+transaction, atomic transaction, view, trigger, partition, pl/pgsql , index ,  enum ,
+
+
+
+cashing
+ttl , expire time
+memory use in python, garbage collector, reference count
+
+web protocol
+http methods
+how works web
+websocket
+graphql
+cron
+
+Big O notation
+sorts (merge, quick, bubble, insert, select)
+search (linear, binary)
+
+context manager (custom), generator, decorator, iterator,
+ci/cd, kanban
+celery, redis, rabbitmq, elasticsearch
+
+design patterns
+OOP/SOLID/YAGNI/KISS
+PUT with Patch
+SCRUM
+Sql/NoSql
