@@ -58,3 +58,9 @@ class OrderModelSerializer(ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+
+# class OrderItemModelSerializer(ModelSerializer):
+#     class Meta:
+#         model = Order
+#         fields = 'gift', 'payment_method',
