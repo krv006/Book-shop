@@ -58,7 +58,12 @@ This project is built with **Django REST Framework (DRF)** and provides a robust
 | **JWT Authentication** | Secure authentication |
 | **Faker & Django Seed** | Dummy data generation |
 
+
 ---
 
-## 📂 Project Structure
+## ⚙ Installation & Setup
 
+### Clone the repository  
+```sh
+git clone https://github.com/krv006/Book-shop.git
+cd self-study
