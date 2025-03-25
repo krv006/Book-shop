@@ -66,4 +66,3 @@ This project is built with **Django REST Framework (DRF)** and provides a robust
 ### Clone the repository  
 ```sh
 git clone https://github.com/krv006/Book-shop.git
-cd self-study
